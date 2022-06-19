@@ -3,7 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_main.xml" value="0.13055555555555556" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable-v24/ic_broken_image_black.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable-v24/ic_error.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable-v24/ic_loading.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/gradien_color.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/ic_arrow_left.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/item_movie_home.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_detail.xml" value="0.18" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_splash_screnn.xml" value="0.16" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/fragment_genre.xml" value="0.2109375" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/fragment_home.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_home_coming_soon.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_movie_home.xml" value="0.33" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_movie_list.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_review_user.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/layout_comming_soon.xml" value="0.225" />
       </map>
     </option>
   </component>
