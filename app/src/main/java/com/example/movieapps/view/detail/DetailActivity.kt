@@ -92,6 +92,9 @@ class DetailActivity : AppCompatActivity() {
 
                     txtTitle.text = data.title
                     txtContent.text = data.overView
+
+                    binding.shimmerFrameLayout.visibility = View.GONE
+                    binding.lytData.visibility=View.VISIBLE
                 }
 
             }

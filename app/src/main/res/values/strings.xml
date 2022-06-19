@@ -11,4 +11,7 @@
     <string name="review">Review</string>
     <string name="empty_review">Empty Review</string>
     <string name="view_all_review">View All Review</string>
+    <string name="filter">Filter</string>
+    <string name="the_movie">The Movie</string>
+    <string name="home">Home</string>
 </resources>

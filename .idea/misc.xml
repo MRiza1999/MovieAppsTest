@@ -8,18 +8,23 @@
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable-v24/ic_loading.xml" value="0.1" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/gradien_color.xml" value="0.1" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/ic_arrow_left.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/ic_filter.xml" value="0.1" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/item_movie_home.xml" value="0.1" />
-        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_detail.xml" value="0.18" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/drawable/shape_bottom_sheet.xml" value="0.1" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_detail.xml" value="0.14" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_review.xml" value="0.16" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/activity_splash_screnn.xml" value="0.16" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/bottomsheet_filter.xml" value="0.16" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/fragment_genre.xml" value="0.10167098140738998" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/fragment_home.xml" value="0.225" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_home_coming_soon.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_list_genre.xml" value="0.225" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_movie_home.xml" value="0.33" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_movie_list.xml" value="0.225" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/item_review_user.xml" value="0.225" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/layout_comming_soon.xml" value="0.225" />
+        <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/layout_detail_shimmer.xml" value="0.16" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/layout_review_empty.xml" value="0.225" />
         <entry key="..\:/Project/TestingMandiri/MovieAppsTest/app/src/main/res/layout/paging_footer.xml" value="0.225" />
       </map>

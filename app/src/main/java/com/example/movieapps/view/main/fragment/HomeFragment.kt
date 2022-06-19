@@ -18,6 +18,7 @@ import com.example.movieapps.core.domain.main.model.MoviePopularEntity
 import com.example.movieapps.databinding.FragmentHomeBinding
 import com.example.movieapps.util.ItemClickListener
 import com.example.movieapps.view.detail.DetailActivity
+import com.example.movieapps.view.main.MainActivity
 import com.example.movieapps.view.main.adapter.ComingSoonAdapter
 import com.example.movieapps.view.main.adapter.PopularMovieAdapter
 import com.example.movieapps.view.main.adapter.TopRatedMovieAdapter
@@ -27,7 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragmentFragment : Fragment() {
 
-    val apiKey = "a5956c69becb1fc204b4a2c79a865824"
+    //val apiKey = "a5956c69becb1fc204b4a2c79a865824"
     val handler = Handler(Looper.getMainLooper())
 
     private lateinit var binding: FragmentHomeBinding
@@ -36,6 +37,8 @@ class HomeFragmentFragment : Fragment() {
     val popularAdapter = PopularMovieAdapter()
     val comingSoonAdapter = ComingSoonAdapter()
     val topRatedAdapter = TopRatedMovieAdapter()
+
+    lateinit var activity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,7 @@ class HomeFragmentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity = getActivity() as MainActivity
 
         with(binding.rvPopular){
             layoutManager = LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
@@ -65,11 +69,10 @@ class HomeFragmentFragment : Fragment() {
             adapter = topRatedAdapter
         }
 
-        viewModel.getGenreList(apiKey)
-        viewModel.getMoviePopular(apiKey)
-        viewModel.getMovieComingSoon(apiKey)
-        viewModel.getMovieTopRated(apiKey)
-
+        viewModel.getGenreList(activity.apiKey)
+        viewModel.getMoviePopular(activity.apiKey)
+        viewModel.getMovieComingSoon(activity.apiKey)
+        viewModel.getMovieTopRated(activity.apiKey)
         setViewModelAction()
     }
 
