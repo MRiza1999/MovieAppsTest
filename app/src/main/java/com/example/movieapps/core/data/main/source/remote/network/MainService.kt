@@ -1,9 +1,6 @@
 package com.example.movieapps.core.data.main.source.remote.network
 
-import com.example.movieapps.core.data.main.source.remote.response.ResponseDetailMovie
-import com.example.movieapps.core.data.main.source.remote.response.ResponseGenreList
-import com.example.movieapps.core.data.main.source.remote.response.ResponseListMovie
-import com.example.movieapps.core.data.main.source.remote.response.ResponseReviewMovie
+import com.example.movieapps.core.data.main.source.remote.response.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -58,5 +55,12 @@ interface MainService {
         @Query("with_genres")genres:String,
         @Query("page") Page: Int
     ): ResponseListMovie
+
+
+    @GET("3/movie/{movieId}/videos")
+    suspend fun getMovieTrailer(
+        @Path("movieId")movieId:String,
+        @Query("api_key")apiKey:String
+    ): ResponseMovieTrailer
 
 }

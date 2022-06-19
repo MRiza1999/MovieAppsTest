@@ -134,6 +134,24 @@ class MainRemoteDataSource(private val mainService: MainService) {
             }
         }.flowOn(Dispatchers.IO)
     }
+    suspend fun getMovieTrailer(movieId:String,apiKey:String): Flow<ApiResponse<ResponseMovieTrailer>>{
+        return flow {
+            try {
+                val response = mainService.getMovieTrailer(movieId, apiKey)
+                emit(ApiResponse.Success(response))
+            }catch (e: HttpException){
+                if (e.code() in 400..499){
+                    emit(ApiResponse.Error(e.code().toString()))
+                }else if (e.code()==500){
+                    emit(ApiResponse.Error(e.code().toString()))
+                }else{
+                    emit(ApiResponse.Empty)
+                }
+            }catch (e:Exception){
+                emit(ApiResponse.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
     fun getMovieReviewPaging(movieId:String,apiKey:String):Flow<PagingData<ResultsItemReview>>{
         return Pager(

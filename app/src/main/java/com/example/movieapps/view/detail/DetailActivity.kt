@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -12,7 +14,10 @@ import com.example.movieapps.databinding.ActivityDetailBinding
 import com.example.movieapps.databinding.ActivityMainBinding
 import com.example.movieapps.view.detail.adapter.ReviewAdapter
 import com.example.movieapps.view.review.ReviewActivity
+import com.example.movieapps.view.trailer.TrailerActivity
 import com.example.movieapps.viewmodel.MainViewModel
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
@@ -30,6 +35,8 @@ class DetailActivity : AppCompatActivity() {
 
     val reviewAdapter = ReviewAdapter()
 
+    var trailerCode = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,6 +46,7 @@ class DetailActivity : AppCompatActivity() {
         if (movieId!=0){
             viewModel.getMovieDetail(movieId.toString(),apiKey)
             viewModel.getMovieReview(movieId.toString(),apiKey)
+            viewModel.getMovieTrailer(movieId.toString(),apiKey)
         }
 
         with(binding.rvReview){
@@ -95,11 +103,45 @@ class DetailActivity : AppCompatActivity() {
 
                     binding.shimmerFrameLayout.visibility = View.GONE
                     binding.lytData.visibility=View.VISIBLE
-                }
 
+                }
             }
         }
 
+        viewModel.dataMovieTrailer.observe(this){data->
+            if (!data.isNullOrEmpty()){
+                for(item in data){
+                    if (item?.site!=null && item.key!=null){
+                        val site:String = item.site?.lowercase()!!
+                        if (site.contains("YouTube".lowercase())){
+                            trailerCode = item.key!!
+                            setTrailer()
+                        }
+                        break
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun setTrailer() {
+        binding.imgPlay.isVisible = true
+        binding.crdTrailer.isClickable = true
+        lifecycle.addObserver(binding.youtubePlayerView)
+
+        binding.crdTrailer.setOnClickListener {
+            if (trailerCode!=""){
+                binding.youtubePlayerView.visibility = View.VISIBLE
+                binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        youTubePlayer.loadVideo(trailerCode, 0f)
+                    }
+                })
+            }else{
+                Toast.makeText(this@DetailActivity, "Trailer Tidak Ditemukan", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setViewAllReview() {

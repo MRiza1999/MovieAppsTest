@@ -17,5 +17,6 @@ interface IMainRepository {
     fun getMovieReview(movieId:String,apiKey: String):Flow<Resource<List<MovieReviewEntity>>>
     fun getMovieReviewPaging(movieId:String,apiKey: String):Flow<PagingData<ResultsItemReview>>
     fun getMovieListPaging(apiKey:String,genre:String):Flow<PagingData<ResultsItem>>
+    fun getMovieTrailer(movieId:String,apiKey: String):Flow<Resource<List<MovieTrailerEntity>>>
 
 }

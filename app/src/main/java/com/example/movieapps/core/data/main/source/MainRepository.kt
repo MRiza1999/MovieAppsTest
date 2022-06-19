@@ -130,4 +130,23 @@ class MainRepository(private val mainRemoteDataSource: MainRemoteDataSource):IMa
         return mainRemoteDataSource.getMovieListPaging(apiKey, genre)
     }
 
+    override fun getMovieTrailer(
+        movieId: String,
+        apiKey: String
+    ): Flow<Resource<List<MovieTrailerEntity>>> = flow {
+        emit(Resource.Loading())
+        when(val apiResponse = mainRemoteDataSource.getMovieTrailer(movieId,apiKey).first()){
+            is ApiResponse.Success->{
+                val response = MainDataMapper.mapResponseMovieTrailerToEntity(apiResponse.data.results)
+                emit(Resource.Success(response))
+            }
+            is ApiResponse.Empty->{
+                emit(Resource.Error("Error"))
+            }
+            is ApiResponse.Error->{
+                emit(Resource.Error(apiResponse.errorMessage))
+            }
+        }
+    }
+
 }

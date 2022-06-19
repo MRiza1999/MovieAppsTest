@@ -14,6 +14,9 @@
         android:theme="@style/Theme.MovieApps"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.trailer.TrailerActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.review.ReviewActivity"
             android:exported="false" />
         <activity

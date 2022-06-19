@@ -51,4 +51,11 @@ class MainInteractor(private val mainRepository: IMainRepository): MainUseCase {
         return mainRepository.getMovieListPaging(apiKey, genre)
     }
 
+    override fun getMovieTrailer(
+        movieId: String,
+        apiKey: String
+    ): Flow<Resource<List<MovieTrailerEntity>>> {
+        return mainRepository.getMovieTrailer(movieId,apiKey)
+    }
+
 }

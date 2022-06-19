@@ -1,9 +1,6 @@
 package com.example.movieapps.core.persistences.mapper.main
 
-import com.example.movieapps.core.data.main.source.remote.response.GenresItem
-import com.example.movieapps.core.data.main.source.remote.response.ResponseDetailMovie
-import com.example.movieapps.core.data.main.source.remote.response.ResultsItem
-import com.example.movieapps.core.data.main.source.remote.response.ResultsItemReview
+import com.example.movieapps.core.data.main.source.remote.response.*
 import com.example.movieapps.core.domain.main.model.*
 import com.example.movieapps.util.Utils
 
@@ -67,4 +64,12 @@ object MainDataMapper {
             vote = input?.voteAverage.toString(),
             genre = Utils.genreListToString(input!!.genres)
         )
+
+    fun mapResponseMovieTrailerToEntity(input:List<ResultsItemTrailer?>):List<MovieTrailerEntity> =
+        input.map {
+            MovieTrailerEntity(
+                key = it?.key,
+                site = it?.site
+            )
+        }
 }

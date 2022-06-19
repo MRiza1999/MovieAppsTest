@@ -40,6 +40,15 @@ class MainViewModel(private val mainUseCase: MainUseCase):ViewModel() {
     private val _dataMovieReview = MutableLiveData<List<MovieReviewEntity?>?>()
     private val _isErrorMovieReview = MutableLiveData<String>()
 
+    private val _isLoadingMovieTrailer = MutableLiveData<Boolean>()
+    private val _dataMovieTrailer = MutableLiveData<List<MovieTrailerEntity?>?>()
+    private val _isErrorMovieTrailer = MutableLiveData<String>()
+
+
+    val isLoadingMovieTrailer = _isLoadingMovieTrailer
+    val dataMovieTrailer = _dataMovieTrailer
+    val isErrorMovieTrailer = _isErrorMovieTrailer
+
     val isLoadingMovieReview = _isLoadingMovieReview
     val dataMovieReview = _dataMovieReview
     val isErrorMovieReview = _isErrorMovieReview
@@ -219,6 +228,34 @@ class MainViewModel(private val mainUseCase: MainUseCase):ViewModel() {
                 }
         }
     }
+
+    fun getMovieTrailer(movieId:String,apiKey: String){
+        viewModelScope.launch {
+            mainUseCase.getMovieTrailer(movieId,apiKey)
+                .onStart {
+                    _isLoadingMovieTrailer.postValue(true)
+                }
+                .onCompletion {
+                    _isLoadingMovieTrailer.postValue(false)
+                }
+                .collect { data->
+                    when (data) {
+                        is Resource.Loading ->
+                            _isLoadingMovieTrailer.postValue(true)
+                        is Resource.Success -> {
+                            _isLoadingMovieTrailer.postValue(false)
+                            _dataMovieTrailer.postValue(data.data)
+                        }
+                        is Resource.Error -> {
+                            _isLoadingMovieTrailer.postValue(false)
+                            _isErrorMovieTrailer.postValue(data.message!!)
+                        }
+                    }
+                }
+        }
+    }
+
+
 
     fun getMovieReviewPaging(movieId:String,apiKey: String): Flow<PagingData<UiReviewModel.DetailListReview>> {
         return mainUseCase.getMovieReviewPaging(movieId, apiKey)

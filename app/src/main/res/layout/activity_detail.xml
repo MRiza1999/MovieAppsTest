@@ -176,6 +176,7 @@
                                 app:layout_constraintDimensionRatio="1:0.5"
                                 app:cardCornerRadius="10dp"
                                 android:layout_marginTop="8dp"
+                                android:clickable="false"
                                 app:layout_constraintTop_toBottomOf="@id/txt_trailer"
                                 >
 
@@ -199,14 +200,28 @@
 
 
                             <ImageView
+                                android:id="@+id/img_play"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:visibility="invisible"
                                 app:layout_constraintTop_toTopOf="@id/crd_trailer"
                                 app:layout_constraintBottom_toBottomOf="@id/crd_trailer"
                                 app:layout_constraintLeft_toLeftOf="@id/crd_trailer"
                                 app:layout_constraintRight_toRightOf="@id/crd_trailer"
                                 android:src="@drawable/ic_play"
                                 app:tint="@color/white" />
+
+
+
+                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                android:id="@+id/youtube_player_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:visibility="invisible"
+                                app:layout_constraintTop_toTopOf="@id/crd_trailer"
+                                app:layout_constraintBottom_toBottomOf="@id/crd_trailer"
+                                />
+
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

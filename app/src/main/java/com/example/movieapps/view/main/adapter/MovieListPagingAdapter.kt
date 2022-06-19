@@ -46,11 +46,7 @@ class MovieListPagingAdapter:
         val uiModel = getItem(position)
         (holder as ViewHolder).bind(uiModel?.dataListMovie!!)
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context,DetailActivity::class.java)
-            intent.putExtra(DetailActivity.ARG_MOVIE_ID,uiModel.dataListMovie.id)
-            holder.itemView.context.startActivity(intent)
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -69,17 +65,12 @@ class MovieListPagingAdapter:
                     )
                     .into(imgImage)
 
-                /*binding.lytContainer.setOnClickListener {
-                    Log.d("ClikListenerItemFilm","ini film ${data.title}")
-                    listener?.onClick(data)
-                }
-*/
-                /*binding.crdImage.setOnClickListener {
+                binding.lytContainer.setOnClickListener {
                     val context = binding.root.context
                     val intent = Intent(context,DetailActivity::class.java)
                     intent.putExtra("arg_movie_id",data.id)
                     context.startActivity(intent)
-                }*/
+                }
             }
         }
     }
