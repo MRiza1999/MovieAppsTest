@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.movieapps.core.domain.main.model.MovieComingSoonEntity
 import com.example.movieapps.core.domain.main.model.MoviePopularEntity
+import com.example.movieapps.core.domain.main.model.MovieTopRatedEntity
 import com.example.movieapps.databinding.FragmentHomeBinding
 import com.example.movieapps.util.ItemClickListener
 import com.example.movieapps.view.detail.DetailActivity
@@ -39,6 +41,10 @@ class HomeFragmentFragment : Fragment() {
     val topRatedAdapter = TopRatedMovieAdapter()
 
     lateinit var activity: MainActivity
+
+    var isMoviePopularLoading = false
+    var isMovieTopRatedLoading = false
+    var isMovieComingSoonLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +75,7 @@ class HomeFragmentFragment : Fragment() {
             adapter = topRatedAdapter
         }
 
-        viewModel.getGenreList(activity.apiKey)
+        //viewModel.getGenreList(activity.apiKey)
         viewModel.getMoviePopular(activity.apiKey)
         viewModel.getMovieComingSoon(activity.apiKey)
         viewModel.getMovieTopRated(activity.apiKey)
@@ -78,18 +84,19 @@ class HomeFragmentFragment : Fragment() {
 
 
     private fun setViewModelAction() {
-
-        viewModel.dataGenreList.observe(viewLifecycleOwner){data->
-            if (data!=null && data.isNotEmpty()){
-                //binding.txtText.text = "Jumlah genre ${data.size}"
-
-            }
+        viewModel.isLoadingMoviePopular.observe(viewLifecycleOwner){status->
+            isMoviePopularLoading = status
+            setView()
         }
 
-        viewModel.isErrorGenreList.observe(viewLifecycleOwner){message->
-            if (message!=null){
-                Log.d("ErrorLog","Genre List Error $message")
-            }
+        viewModel.isLoadingMovieTopRated.observe(viewLifecycleOwner){status->
+            isMovieTopRatedLoading = status
+            setView()
+        }
+
+        viewModel.isLoadingMovieComingSoon.observe(viewLifecycleOwner){status->
+            isMovieComingSoonLoading = status
+            setView()
         }
 
         viewModel.dataMoviePopular.observe(viewLifecycleOwner){data->
@@ -103,17 +110,46 @@ class HomeFragmentFragment : Fragment() {
             if (!data.isNullOrEmpty()){
                 comingSoonAdapter.setData(data)
                 setComingSoon()
+                setMovieComingSoonCallback()
             }
         }
 
         viewModel.dataMovieTopRated.observe(viewLifecycleOwner){data->
             if (!data.isNullOrEmpty()){
                 topRatedAdapter.setData(data)
+                setMovieTopRatedCallback()
             }
         }
 
 
 
+    }
+
+    private fun setView() {
+        if (!isMovieComingSoonLoading && !isMoviePopularLoading && !isMovieTopRatedLoading){
+            binding.lytData.visibility = View.VISIBLE
+            binding.shimmerFrameLayout.visibility = View.GONE
+        }
+    }
+
+    private fun setMovieTopRatedCallback() {
+        topRatedAdapter.setTopRatedMovieCallback(object :ItemClickListener<MovieTopRatedEntity?>{
+            override fun onClick(data: MovieTopRatedEntity?) {
+                val intent = Intent(context,DetailActivity::class.java)
+                intent.putExtra(DetailActivity.ARG_MOVIE_ID,data?.id)
+                startActivity(intent)
+            }
+        })
+    }
+
+    private fun setMovieComingSoonCallback() {
+        comingSoonAdapter.setComingSoonMovieCallback(object :ItemClickListener<MovieComingSoonEntity?>{
+            override fun onClick(data: MovieComingSoonEntity?) {
+                val intent = Intent(context,DetailActivity::class.java)
+                intent.putExtra(DetailActivity.ARG_MOVIE_ID,data?.id)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setMoviePopularCallback() {

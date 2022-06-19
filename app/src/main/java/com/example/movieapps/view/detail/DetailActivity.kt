@@ -100,6 +100,7 @@ class DetailActivity : AppCompatActivity() {
 
                     txtTitle.text = data.title
                     txtContent.text = data.overView
+                    txtGenre.text = "Genre : ${data.genre}"
 
                     binding.shimmerFrameLayout.visibility = View.GONE
                     binding.lytData.visibility=View.VISIBLE

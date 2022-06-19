@@ -13,7 +13,6 @@ import com.example.movieapps.util.ItemClickListener
 class PopularMovieAdapter:RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
 
-    var listener:ItemClickListener<MoviePopularEntity?>? = null
 
     val listData:ArrayList<MoviePopularEntity?> = ArrayList()
 
@@ -23,9 +22,12 @@ class PopularMovieAdapter:RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+
+    var listener:ItemClickListener<MoviePopularEntity?>? = null
     fun setPopularMovieCallback(itemClickListener: ItemClickListener<MoviePopularEntity?>?){
         listener = itemClickListener
     }
+
 
 
     override fun getItemId(position: Int): Long {

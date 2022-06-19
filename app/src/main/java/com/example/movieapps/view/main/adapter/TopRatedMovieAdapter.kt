@@ -6,18 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapps.R
+import com.example.movieapps.core.domain.main.model.MoviePopularEntity
 import com.example.movieapps.core.domain.main.model.MovieTopRatedEntity
 import com.example.movieapps.databinding.ItemMovieHomeBinding
+import com.example.movieapps.util.ItemClickListener
 
 class TopRatedMovieAdapter:RecyclerView.Adapter <TopRatedMovieAdapter.ViewHolder>() {
 
 
     val listData:ArrayList<MovieTopRatedEntity?> = ArrayList()
 
+
     fun setData(list:List<MovieTopRatedEntity?>){
         listData.clear()
         listData.addAll(list)
         notifyDataSetChanged()
+    }
+
+
+    var listener: ItemClickListener<MovieTopRatedEntity?>? = null
+    fun setTopRatedMovieCallback(itemClickListener: ItemClickListener<MovieTopRatedEntity?>?){
+        listener = itemClickListener
     }
 
 
@@ -51,6 +60,9 @@ class TopRatedMovieAdapter:RecyclerView.Adapter <TopRatedMovieAdapter.ViewHolder
                             .error(R.drawable.ic_error)
                     )
                     .into(imgImage)
+                binding.lytContainer.setOnClickListener {
+                    listener?.onClick(data)
+                }
             }
         }
     }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/nav_fragment_account">
+    app:startDestination="@id/nav_fragment_home">
 
     <fragment
         app:moduleName="dashboard"
@@ -11,8 +11,8 @@
         android:name="com.example.movieapps.view.main.fragment.HomeFragmentFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
-        app:moduleName="profile"
-        android:id="@+id/nav_fragment_account"
+        app:moduleName="genre"
+        android:id="@+id/nav_fragment_genre"
         android:name="com.example.movieapps.view.main.fragment.GenreFragment"
         tools:layout="@layout/fragment_genre" />
 </navigation>

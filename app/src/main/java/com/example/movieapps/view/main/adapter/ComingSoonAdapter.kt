@@ -7,7 +7,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapps.R
 import com.example.movieapps.core.domain.main.model.MovieComingSoonEntity
+import com.example.movieapps.core.domain.main.model.MovieTopRatedEntity
 import com.example.movieapps.databinding.ItemHomeComingSoonBinding
+import com.example.movieapps.util.ItemClickListener
 
 class ComingSoonAdapter:RecyclerView.Adapter<ComingSoonAdapter.ViewHolder>() {
 
@@ -19,6 +21,10 @@ class ComingSoonAdapter:RecyclerView.Adapter<ComingSoonAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    var listener: ItemClickListener<MovieComingSoonEntity?>? = null
+    fun setComingSoonMovieCallback(itemClickListener: ItemClickListener<MovieComingSoonEntity?>?){
+        listener = itemClickListener
+    }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -55,6 +61,9 @@ class ComingSoonAdapter:RecyclerView.Adapter<ComingSoonAdapter.ViewHolder>() {
                             .error(R.drawable.ic_error)
                     )
                     .into(imgImage)
+                binding.lytContainer.setOnClickListener {
+                    listener?.onClick(data)
+                }
             }
         }
     }
