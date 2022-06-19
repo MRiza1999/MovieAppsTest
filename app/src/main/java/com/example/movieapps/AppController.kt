@@ -1,6 +1,7 @@
 package com.example.movieapps
 
 import android.app.Application
+import androidx.paging.ExperimentalPagingApi
 import com.example.movieapps.di.networkModule
 import com.example.movieapps.di.repositoryModule
 import com.example.movieapps.di.usecaseModule
@@ -10,6 +11,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
+@ExperimentalPagingApi
 open class AppController: Application() {
 
     override fun onCreate() {

@@ -92,6 +92,9 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    //paging
+    implementation 'androidx.paging:paging-runtime:3.0.0-alpha03'
+
 
     //more third library
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'

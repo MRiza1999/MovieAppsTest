@@ -3,12 +3,15 @@ package com.example.movieapps.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
+import com.example.movieapps.core.data.main.source.remote.response.ResultsItem
+import com.example.movieapps.core.data.main.source.remote.response.ResultsItemReview
 import com.example.movieapps.core.domain.main.model.*
 import com.example.movieapps.core.domain.main.usecase.MainUseCase
 import com.example.movieapps.core.vo.Resource
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val mainUseCase: MainUseCase):ViewModel() {
@@ -217,5 +220,24 @@ class MainViewModel(private val mainUseCase: MainUseCase):ViewModel() {
         }
     }
 
+    fun getMovieReviewPaging(movieId:String,apiKey: String): Flow<PagingData<UiReviewModel.DetailListReview>> {
+        return mainUseCase.getMovieReviewPaging(movieId, apiKey)
+            .map { pagingData->pagingData.map { UiReviewModel.DetailListReview(it) } }
+            .cachedIn(viewModelScope)
+    }
+
+    fun getMovieListPaging(movieId:String,apiKey: String): Flow<PagingData<UiMovieModel.ListMovie>> {
+        return mainUseCase.getMovieListPaging(movieId, apiKey)
+            .map { pagingData->pagingData.map { UiMovieModel.ListMovie(it) } }
+            .cachedIn(viewModelScope)
+    }
+
+    sealed class UiReviewModel {
+        data class DetailListReview(val dataListReview: ResultsItemReview) : UiReviewModel()
+    }
+
+    sealed class UiMovieModel {
+        data class ListMovie(val dataListMovie: ResultsItem) : UiMovieModel()
+    }
 
 }

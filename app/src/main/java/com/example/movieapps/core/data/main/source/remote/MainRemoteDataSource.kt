@@ -1,18 +1,25 @@
 package com.example.movieapps.core.data.main.source.remote
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.movieapps.core.ApiResponse
 import com.example.movieapps.core.data.main.source.remote.network.MainService
-import com.example.movieapps.core.data.main.source.remote.response.ResponseDetailMovie
-import com.example.movieapps.core.data.main.source.remote.response.ResponseGenreList
-import com.example.movieapps.core.data.main.source.remote.response.ResponseListMovie
-import com.example.movieapps.core.data.main.source.remote.response.ResponseReviewMovie
+import com.example.movieapps.core.data.main.source.remote.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 
+@ExperimentalPagingApi
 class MainRemoteDataSource(private val mainService: MainService) {
+
+
+    companion object {
+        const val NETWORK_PAGE_SIZE = 10
+    }
 
     suspend fun getGenreList(apiKey:String): Flow<ApiResponse<ResponseGenreList>>{
         return flow {
@@ -127,5 +134,20 @@ class MainRemoteDataSource(private val mainService: MainService) {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getMovieReviewPaging(movieId:String,apiKey:String):Flow<PagingData<ResultsItemReview>>{
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE,enablePlaceholders = false),
+            pagingSourceFactory = {ReviewListPagingSource(mainService,movieId, apiKey)}
+        ).flow
+    }
+
+    fun getMovieListPaging(apiKey:String,genre:String):Flow<PagingData<ResultsItem>>{
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE,enablePlaceholders = false),
+            pagingSourceFactory = {MovieListPagingSource(mainService,apiKey,genre)}
+        ).flow
+    }
+
 
 }

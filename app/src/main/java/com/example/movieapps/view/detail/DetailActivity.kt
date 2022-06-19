@@ -1,7 +1,9 @@
 package com.example.movieapps.view.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -9,6 +11,7 @@ import com.example.movieapps.R
 import com.example.movieapps.databinding.ActivityDetailBinding
 import com.example.movieapps.databinding.ActivityMainBinding
 import com.example.movieapps.view.detail.adapter.ReviewAdapter
+import com.example.movieapps.view.review.ReviewActivity
 import com.example.movieapps.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -56,6 +59,11 @@ class DetailActivity : AppCompatActivity() {
         viewModel.dataMovieReview.observe(this){data->
             if (!data.isNullOrEmpty()){
                 reviewAdapter.setData(data)
+                binding.txtViewMoreReview.visibility = View.VISIBLE
+                setViewAllReview()
+            }else{
+                binding.rvReview.visibility = View.GONE
+                binding.incReviewEmpty.lytReviewEmpty.visibility = View.VISIBLE
             }
         }
 
@@ -89,5 +97,13 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setViewAllReview() {
+        binding.txtViewMoreReview.setOnClickListener {
+            val intent = Intent(this,ReviewActivity::class.java)
+            intent.putExtra(ReviewActivity.ARG_MOVIE_ID,movieId)
+            startActivity(intent)
+        }
     }
 }

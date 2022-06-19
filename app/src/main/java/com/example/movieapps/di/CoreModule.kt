@@ -1,5 +1,6 @@
 package com.example.movieapps.di
 
+import androidx.paging.ExperimentalPagingApi
 import com.example.movieapps.AppController
 import com.example.movieapps.core.data.main.source.remote.network.MainService
 import okhttp3.OkHttpClient
@@ -10,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+@ExperimentalPagingApi
 val networkModule = module {
     single {
         OkHttpClient.Builder().apply {

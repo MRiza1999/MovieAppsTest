@@ -8,7 +8,7 @@ data class ResponseListMovie(
 	val page: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem?> = emptyList()
+	val results: List<ResultsItem> = emptyList()
 )
 
 data class ResultsItem(

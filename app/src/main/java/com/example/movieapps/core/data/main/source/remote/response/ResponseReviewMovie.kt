@@ -11,7 +11,7 @@ data class ResponseReviewMovie(
 	val page: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItemReview?> = emptyList()
+	val results: List<ResultsItemReview> = emptyList()
 )
 
 data class AuthorDetails(

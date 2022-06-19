@@ -1,7 +1,11 @@
 package com.example.movieapps.core.data.main.source
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingData
 import com.example.movieapps.core.ApiResponse
 import com.example.movieapps.core.data.main.source.remote.MainRemoteDataSource
+import com.example.movieapps.core.data.main.source.remote.response.ResultsItem
+import com.example.movieapps.core.data.main.source.remote.response.ResultsItemReview
 import com.example.movieapps.core.domain.main.model.*
 import com.example.movieapps.core.domain.main.repository.IMainRepository
 import com.example.movieapps.core.persistences.mapper.main.MainDataMapper
@@ -10,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
+@ExperimentalPagingApi
 class MainRepository(private val mainRemoteDataSource: MainRemoteDataSource):IMainRepository {
 
     override fun getGenreList(apiKey: String): Flow<Resource<List<GenreListEntity>>> = flow {
@@ -114,5 +119,15 @@ class MainRepository(private val mainRemoteDataSource: MainRemoteDataSource):IMa
         }
     }
 
+    override fun getMovieReviewPaging(
+        movieId: String,
+        apiKey: String
+    ): Flow<PagingData<ResultsItemReview>> {
+        return mainRemoteDataSource.getMovieReviewPaging(movieId, apiKey)
+    }
+
+    override fun getMovieListPaging(apiKey: String, genre: String): Flow<PagingData<ResultsItem>> {
+        return mainRemoteDataSource.getMovieListPaging(apiKey, genre)
+    }
 
 }
